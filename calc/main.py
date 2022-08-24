@@ -14,14 +14,17 @@ ans = expr_diff1(10)
 print(f'Derivative of expr with respect to x: {expr_diff}')
 print(f'Result of x=1 is: {ans}')
 
-#car racing up a hill, velociy at t = 5
+#object up a hill, velociy at t = 5 minutes
 #miles per minute
 #derivative of position with respect to time.
+#velocity speed, direction, time
 car_expr = t**3 - 2*t**2 + 3*t
 
 car_diff = diff(car_expr, t)
 car_diff1 = lambdify(t, car_diff)
-ans_car = car_diff1(5)
+ans_car0 = car_diff1(0)
+ans_car5 = car_diff1(5)
 
-print(f'Derivative of expr with respect to t: {car_diff}')
-print(f'Result of t=5 is: {ans_car}')
+print(f'Derivative of car_expr with respect to t: {car_diff}')
+print(f'Velocity at 0 minutes is {ans_car0} miles/minute')
+print(f'Velocity at 5 minutes is {ans_car5} miles/minute')
