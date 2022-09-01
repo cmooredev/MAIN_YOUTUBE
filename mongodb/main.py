@@ -26,37 +26,36 @@ class MyClient(discord.Client):
 client = MyClient(intents=discord.Intents.default())
 tree = app_commands.CommandTree(client)
 
-#--update
-
 
 @tree.context_menu(name='store', guild=discord.Object(id=997204563612401684))
 async def store(interaction: discord.Interaction, message: discord.Message):
-    ticket = secrets.token_hex(5)
-    db.server_message_log.insert_one(
-        {
-            "ticket" : ticket,
-            "message": message.content,
-            "author": message.author.id,
-        }
-    )
+    author = message.author.id
+    key = {'author': message.author.id}
+
+    data = {
+        "message": message.content,
+        "author": message.author.id,
+    }
+
+    user_file = {f'ticket_id.{secrets.token_hex(6)}': data}
+
+    db.server_message_log.update_one(key, {'$set': user_file}, True)
 
     await interaction.response.send_message("Message stored!")
 
-#--update
-
-# --- NEW
 
 @tree.context_menu(name='findmes', guild=discord.Object(id=997204563612401684))
 async def findmes(interaction: discord.Interaction, message: discord.Message):
     author = message.author.id
     key = {'author': author}
     mes = ''
-    for m in db.server_message_log.find(key):
-        mes = mes + '\n' + m['message']
-    print(mes)
+    m = db.server_message_log.find_one(key)
+    for ticket in m['ticket_id']:
+        mes = mes + '\n'+ 'ticket_id:' + ticket + '\n' + m['ticket_id'][ticket]['message']
+
+
     await interaction.response.send_message(f"Messages found!\n{mes}")
 
 
-# --- NEW
 
-client.run('OTk5MzMzMzcyODAxMzI3MTg0.G4ystb.8ZVAl2HgPzEj7kxgl74CsvZTsubMG2bQLa1UWg')
+client.run('OTk5MzMzMzcyODAxMzI3MTg0.GoSsa1.iyGjh4JAW9ginwwPz9Es8Fanncq43fvXXyyyOw')
