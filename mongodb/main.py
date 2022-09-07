@@ -27,6 +27,8 @@ client = MyClient(intents=discord.Intents.default())
 tree = app_commands.CommandTree(client)
 
 
+
+
 @tree.context_menu(name='store', guild=discord.Object(id=997204563612401684))
 async def store(interaction: discord.Interaction, message: discord.Message):
     author = message.author.id
@@ -34,11 +36,12 @@ async def store(interaction: discord.Interaction, message: discord.Message):
 
     data = {
         "message": message.content,
-        "author": message.author.id,
     }
 
-    user_file = {f'ticket_id.{secrets.token_hex(6)}': data}
 
+    db.server_message_log.update_one(key, {'$inc': {'tickets': 1}}, True)
+
+    user_file = {f'ticket_id.{secrets.token_hex(6)}': data}
     db.server_message_log.update_one(key, {'$set': user_file}, True)
 
     await interaction.response.send_message("Message stored!")
@@ -58,4 +61,4 @@ async def findmes(interaction: discord.Interaction, message: discord.Message):
 
 
 
-client.run('OTk5MzMzMzcyODAxMzI3MTg0.GoSsa1.iyGjh4JAW9ginwwPz9Es8Fanncq43fvXXyyyOw')
+client.run('OTk5MzMzMzcyODAxMzI3MTg0.GcMfWL.9ezl_-HHuP9YPeg6DX1CEc7DqWi0t1KifxsIwg')
