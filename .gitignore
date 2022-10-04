@@ -1,2 +1,6 @@
 .env
+**/config.py
+/env
+env
 config.py
+**/node_modules
