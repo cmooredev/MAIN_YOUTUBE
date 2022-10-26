@@ -19,7 +19,7 @@ def next():
 
     # For authorization, you can use either your bot token
     headers = {
-        "Authorization": "Bot OTk5MzMzMzcyODAxMzI3MTg0.G1BawX.9PzVVwItWH4f8sDvty_JtejSeV_GrFN9HwM8zk"
+        "Authorization": "Bot BOT_TOKEN_HERE"
     }
 
     r = requests.post(url, headers=headers, json=json)

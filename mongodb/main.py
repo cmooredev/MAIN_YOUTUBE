@@ -7,7 +7,7 @@ import asyncio
 #NEW
 import secrets
 
-client = pymongo.MongoClient("mongodb+srv://root:toor@cluster0.eswaoor.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://user:pass@cluster0.url.mongodb.net/?retryWrites=true&w=majority")
 db = client.users
 
 
@@ -61,4 +61,4 @@ async def findmes(interaction: discord.Interaction, message: discord.Message):
 
 
 
-client.run('OTk5MzMzMzcyODAxMzI3MTg0.GcMfWL.9ezl_-HHuP9YPeg6DX1CEc7DqWi0t1KifxsIwg')
+client.run('TOKEN_GOES_HERE')
