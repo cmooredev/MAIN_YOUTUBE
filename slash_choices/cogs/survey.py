@@ -16,6 +16,8 @@ class Survey(commands.Cog):
         await ctx.send(
           f"Synced {len(fmt)} commands to the current guild."
         )
+        channel = await ctx.message.author.create_dm()
+        await channel.send('hey buddy')
         return
 
     @app_commands.command(name="choosecolor", description="color selector")
