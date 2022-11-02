@@ -4,3 +4,4 @@
 env
 config.py
 **/node_modules
+oauth/config.json
