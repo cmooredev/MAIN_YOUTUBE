@@ -3,5 +3,6 @@
 /env
 env
 config.py
+config.json
 **/node_modules
-oauth/config.json
+**/config.json
