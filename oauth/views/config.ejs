@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="../css/styles.css">
+    <meta charset="utf-8">
+    <title>cmoorelabs</title>
+  </head>
+  <body>
+    <div id="info">
+      <p>discord bo?t</p>
+      <% for(let i=0; i < data.length; i++) { %>
+        <div class="card">
+          <p>Command: <%= data[i]['name'] %></p>
+          <% if(data[i]['type'] == 1) {%>
+            <p>type: Chat %></p>
+          <% } %>
+          <% if(data[i]['type'] == 2) {%>
+            <p>type: User %></p>
+          <% } %>
+          <% if(data[i]['type'] == 2) {%>
+            <p>Type: Message %></p>
+          <% } %>
+          <p>Description: <%= data[i]['description'] %></p>
+        </div>
+      <% } %>
+  </body>
+  <script type="application/javascript" src="../config.js"></script>
+</html>

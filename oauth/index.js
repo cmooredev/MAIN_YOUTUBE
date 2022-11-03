@@ -1,27 +1,31 @@
 const express = require('express');
-const { port, token } = require('./config.json');
+const { port, token, appId } = require('./config.json');
 const path = require('path');
 const { fetch } = require('undici');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(express.static(path.join(__dirname + '/public')));
 
 app.get('/config/:id', async (request, response) => {
-  let guild = await getGuild(request.params.id);
-  console.log(guild);
-  response.send(`${guild.name}`);
+  let configData = await getGuildCommands(request.params.id);
+  console.log(configData);
+  response.render('config', {
+    data: configData
+  });
 });
 
-const getGuild = async (id) => {
+const getGuildCommands = async (id) => {
   console.log(id);
-  const res = await fetch('https://discord.com/api/v10/oauth2/applications/@me', {
+  const response = await fetch(`https://discord.com/api/v10/applications/${appId}/commands`, {
     headers: {
       authorization: `Bot ${token}`,
     },
   });
-  return res.json();
+  return response.json();
+};
 
-}
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
