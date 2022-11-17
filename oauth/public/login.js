@@ -86,17 +86,18 @@ let createPage = (response) => {
       console.log(perms);
       if(perms['generalAdministrator'] == true){
         let title =  document.createElement('p');
-        let g = document.createElement('div');
+        let g = document.createElement('a');
+        g.href=`/config/${guild.id}`;
         g.classList.add('card');
         title.innerText += `${guild.name}`;
+
+
         if(guild.icon != null){
-          let a = document.createElement('a');
-          a.href=`/config/${guild.id}`;
           let img = document.createElement('img');
           let src = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`;
           img.src = src;
-          a.appendChild(img);
-          g.appendChild(a);
+          g.appendChild(img);
+
         }
         guilds.appendChild(title);
         guilds.appendChild(g);
@@ -125,5 +126,5 @@ window.onload = () => {
   }
   getUserLogin();
   getUserGuilds();
-
+  console.log('hello');
 };

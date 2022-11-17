@@ -7,7 +7,7 @@
   </head>
   <body>
     <div id="info">
-      <p>discord bo?t</p>
+      <p>discord bot</p>
       <% for(let i=0; i < data.length; i++) { %>
         <div class="card">
           <p>Command: <%= data[i]['name'] %></p>
@@ -21,7 +21,23 @@
             <p>Type: Message %></p>
           <% } %>
           <p>Description: <%= data[i]['description'] %></p>
-        </div>
+      </div>
+      <% } %>
+
+      <% if(guild == undefined)  { %>
+      <p>Guilds</p>
+      <div class="card">
+
+        <p>Bot Not In Guild</p>
+      </div>
+      <% } %>
+
+      <% if(guild != undefined)  { %>
+      <p>Guilds</p>
+      <div class="card">
+
+        <p>Guild: <%= guild['name'] %></p>
+      </div>
       <% } %>
   </body>
   <script type="application/javascript" src="../config.js"></script>

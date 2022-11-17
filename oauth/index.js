@@ -2,6 +2,7 @@ const express = require('express');
 const { port, token, appId } = require('./config.json');
 const path = require('path');
 const { fetch } = require('undici');
+const perms = require('./perms');
 
 const app = express();
 
@@ -11,11 +12,35 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 app.get('/config/:id', async (request, response) => {
   let configData = await getGuildCommands(request.params.id);
-  console.log(configData);
+  let guild = await getBotGuilds(request.params.id);
   response.render('config', {
-    data: configData
+    data: configData,
+    guild: guild
   });
 });
+
+// new
+
+const getBotGuilds = async (id) => {
+  const response = await fetch('https://discord.com/api/users/@me/guilds', {
+    headers: {
+      authorization: `Bot ${token}`,
+    },
+  })
+  let guilds = await response.json();
+  console.log(guilds);
+  for(let i=0; i < guilds.length; i++) {
+    if(guilds[i]['id'] == id) {
+      console.log('match!!!!!!!!!!!!');
+      console.log(perms.checkPerms(guilds[i]['permissions']));
+      return guilds[i];
+    }
+  }
+  return;
+};
+
+
+// ^ new end
 
 const getGuildCommands = async (id) => {
   console.log(id);
