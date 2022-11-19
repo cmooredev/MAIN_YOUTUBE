@@ -9,8 +9,9 @@
     <div id="info">
       <p>discord bot</p>
       <% for(let i=0; i < data.length; i++) { %>
-        <div class="card">
-          <p>Command: <%= data[i]['name'] %></p>
+        <div class="card" onclick="updateCommand(getElementById('command_id'))">
+          <p>Command:</p> <p id="command_name" contenteditable><%= data[i]['name'] %></p>
+          <p id="command_id"><%= data[i]['id'] %></p>
           <% if(data[i]['type'] == 1) {%>
             <p>type: Chat %></p>
           <% } %>
@@ -27,7 +28,6 @@
       <% if(guild == undefined)  { %>
       <p>Guilds</p>
       <div class="card">
-
         <p>Bot Not In Guild</p>
       </div>
       <% } %>
@@ -40,5 +40,5 @@
       </div>
       <% } %>
   </body>
-  <script type="application/javascript" src="../config.js"></script>
+  <script type="application/javascript" src="../commands.js"></script>
 </html>

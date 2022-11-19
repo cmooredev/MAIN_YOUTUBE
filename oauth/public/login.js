@@ -83,7 +83,6 @@ let createPage = (response) => {
     document.body.appendChild(guilds);
     for(const guild of response){
       let perms = checkPerms(guild.permissions);
-      console.log(perms);
       if(perms['generalAdministrator'] == true){
         let title =  document.createElement('p');
         let g = document.createElement('a');
@@ -126,5 +125,4 @@ window.onload = () => {
   }
   getUserLogin();
   getUserGuilds();
-  console.log('hello');
 };
