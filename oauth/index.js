@@ -3,16 +3,18 @@ const { port, token, appId } = require('./config.json');
 const path = require('path');
 const { fetch } = require('undici');
 const perms = require('./perms');
+const bodyParser = require('body-parser');
 
+
+const jsonParser = bodyParser.json()
 const app = express();
 
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname + '/public')));
 
-app.get('/config/update/:info', async (request, response) => {
-  let info = JSON.parse(request.params.info);
-  updateCommands(info);
+app.post('/config/update/:info', jsonParser, function (request, response) {
+  updateCommands(request.body);
 });
 
 app.get('/config/:id', async (request, response) => {
@@ -40,7 +42,7 @@ const updateCommands = async (info) => {
         body: JSON.stringify(command),
     })
       .then(response => {
-        console.log(`did it work: ${response.status}`);
+        console.log(`Command Response: ${response.status}`);
       })
       .catch(console.error);
 

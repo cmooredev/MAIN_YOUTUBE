@@ -9,12 +9,17 @@ let updateCommand = async (id) => {
     name: commandName,
     id: commandId,
   }
-  console.log(`here is the name ${name.innerText}`);
-  let response = await fetch(`http://localhost:53134/config/update/${JSON.stringify(commandOptions)}`)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(console.error);
+
+  const response = await fetch(`http://localhost:53134/config/update/${commandId}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(commandOptions)
+  });
+  const content = await response.json();
+
 };
 
 window.onload = () => {
